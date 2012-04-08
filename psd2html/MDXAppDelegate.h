@@ -11,5 +11,16 @@
 @interface MDXAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (nonatomic, retain) NSString *psd2htmlPath;
+@property (nonatomic, retain) NSMutableArray *psd2htmlArgs;
+@property (weak) IBOutlet NSTextField *mainLabel;
+@property (weak) IBOutlet NSProgressIndicator *progressMeter;
+@property (nonatomic, retain) NSTask *psd2htmlTask;
+
+- (void) ensureInitialArgumentList;
+- (NSString *) escapeWhitespace:(NSString *)path;
+- (BOOL)queueFile:(NSString *)file;
+- (void) processQueue;
+- (void) checkTask;
 
 @end
