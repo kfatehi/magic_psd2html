@@ -7,6 +7,7 @@
 //
 
 #import "MDXAppDelegate.h"
+#import "MDXHelper.h"
 
 @implementation MDXAppDelegate
 @synthesize mainLabel;
@@ -18,19 +19,25 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     NSLog(@"Startup");
-    [self ensureInitialArgumentList];
+    [self ensureReadyState];
     // Wait a bit, make sure we've filled our set of PSDs...
     // Then launch psd2html-jsilver.app
     [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
-{
+{   
     // Receives the drag and drop event
     return [self queueFile:filename];
 }
 
-- (void) ensureInitialArgumentList {
+- (void) ensureReadyState {
+    // Consider this the entry point into the application.
+    // This method gets called once and only once per launch at the very start.
+    
+    // TODO: This is a good time to do a pre-flight check for Adobe Photoshop,
+    // if it is not installed we should stop immediately.
+    
     if ([psd2htmlArgs count] < 1) {
         psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-jsilver" ofType:@"app"];
         psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
@@ -43,11 +50,16 @@
 
 - (BOOL)queueFile:(NSString *)file
 {
-    [self ensureInitialArgumentList];
+    [self ensureReadyState];
     NSString *psdPath = [self escapeWhitespace:file];
     NSLog(@"The following file has been queued: %@",psdPath);
+    
     // We could do things like make sure the file is real here,
     // preventing things that might fail in the applescript...
+
+    // More importantly, let's duplicate the input file
+    
+    
     [psd2htmlArgs addObject:file];
     return YES;
 }
@@ -55,11 +67,10 @@
 - (void) processQueue
 {
     NSLog(@"Queue has this many files: %lu", [psd2htmlArgs count]-1);
-    NSLog(@"Will now process the queue.");
-
-    [MDXHelper isProcessRunning:@"iTerm"];
-    [MDXHelper isProcessRunning:@"psd2html-jsilver"];
+    NSLog(@"Will now process the queue.");  
     
+    isRunning(@"psd2html-jsilver");
+    //[MDXHelper isProcessRunning:@"psd2html"];
     
     int psdcount = [psd2htmlArgs count] -1; // First argument is just "-a", so subtract one
     if (psdcount == 0) {
@@ -69,36 +80,48 @@
     } else {
         [mainLabel setStringValue:[NSString stringWithFormat:@"Starting subordinate process chains (whipping elves) for %d PSDs", psdcount]];
         [progressMeter startAnimation:self];
-        // Prepare the arguments
-        NSLog(@"Current file list: ");
-        for (NSString *filepath in psd2htmlArgs) {
-            NSLog(@" --  %@", filepath);
-        }
+        
+        NSLog(@"There are %lu PSDs in the queue: %@", 
+              [psd2htmlArgs count], [psd2htmlArgs componentsJoinedByString:@" "]);
+        
         // Send the launch command
         [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
         NSLog(@"Launched psd2html-jsilver.app with the args! w00t");        
-        // start the checkTask timer
-        [self performSelector:@selector(checkTask) withObject:nil afterDelay:5];
-    }
-}
-
-- (void) checkTask {
-    int status = system("ps ax | grep psd2html-jsilver | grep -v grep | wc -l");
-    if ( status == 0 ) { // not running
-        // done, say bye and exit
-        // also pop the object and inform its completion?
-        NSLog(@"Task IS NOT running, what's the current item, do we have insight into the behavior of the subtask?");
-        [self sayBye];
-    } else {
-        // could provide a status update here
-        NSLog(@"Task IS running, what's the current item, do we have insight into the behavior of the subtask?");
+        // start the checkTask timer, given enough time for things to start...
         [self performSelector:@selector(checkTask) withObject:nil afterDelay:10];
     }
 }
 
+- (void) checkTask {
+    if (isRunning(@"psd2html-jsilver")) {       
+        NSLog(@"Task IS running, what's the current item, do we have insight into the behavior of the subtask? Will check if it's running again soon.");
+        // So we may want to implement some AppleScript event listeners
+        // the script can then send messages to THIS program, informing it of
+        // what file we're working on. (See NSAppleEventDescriptor)
+        // This app can then do whatever with it (e.g. remove it from a UITableView)
+        
+        // Idea: in the meanwhile, we COULD query what stage we're at
+        // by using isProcessRunning against the Decrufter, X11, and Reshuffler
+        
+        if (isRunning(@"Decrufter") || isRunning(@"Photoshop")) {
+            showMsg(@"Meticulously removing tricky, sticky cruft from the PSD...");
+        } else if isRunning(@"Reshuffler") {
+            showMsg(@"Applying magical DOM reshuffling spices...");
+        } else if isRunning(@"python-fu-psd2html") {
+            showMsg(@"Converting... Make sure to click through any dialogs.");
+        } else {
+            showMsg(@"In process... Make sure to click through any dialogs.");
+        }
+        [self performSelector:@selector(checkTask) withObject:nil afterDelay:5];
+
+    } else
+        [self sayBye];
+}
+
 -(void) sayBye {
     NSLog(@"Quitting now!");
-    [mainLabel setStringValue:@"Quitting app."];
+    showMsg(@"No PSDs left to process. Goodbye.");
+    [progressMeter stopAnimation:self];
     [NSApp performSelector:@selector(terminate:) withObject:nil afterDelay:1.0];
 }
 

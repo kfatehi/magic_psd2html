@@ -36,11 +36,11 @@
     // Grab data from process execution
     fgets(data, DATA_SIZE , pf);
     
-    
-    if ([[NSString stringWithUTF8String:data] integerValue])
-        NSLog(@"%@ is NOT running", processName);
+    int val = [[NSString stringWithUTF8String:data] integerValue];
+    if (val == 0)
+        NSLog(@"%@ is NOT running (%d)", processName, val);
     else {
-        NSLog(@"%@ IS running", processName);
+        NSLog(@"%@ IS running (%d)", processName, val);
         running = YES;
     }
     

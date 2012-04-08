@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MDXHelper : NSObject
+#define isRunning(process) ([MDXHelper isProcessRunning:process]) // Like a boss
 
-+ (BOOL) isProcessRunning: (NSString *)processName;
+@interface MDXHelper
+
++ (BOOL) isProcessRunning: (NSString *)processName; // Class method
 
 @end

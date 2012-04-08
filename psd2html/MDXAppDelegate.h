@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "MDXHelper.h"
 
+#define showMsg(msg) ([mainLabel setStringValue:msg])
+
 @interface MDXAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
@@ -17,10 +19,11 @@
 @property (weak) IBOutlet NSTextField *mainLabel;
 @property (weak) IBOutlet NSProgressIndicator *progressMeter;
 
-- (void) ensureInitialArgumentList;
+- (void) ensureReadyState;
 - (NSString *) escapeWhitespace:(NSString *)path;
 - (BOOL)queueFile:(NSString *)file;
 - (void) processQueue;
 - (void) checkTask;
+- (void) sayBye;
 
 @end
