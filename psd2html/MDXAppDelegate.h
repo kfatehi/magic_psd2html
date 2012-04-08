@@ -15,7 +15,6 @@
 @property (nonatomic, retain) NSMutableArray *psd2htmlArgs;
 @property (weak) IBOutlet NSTextField *mainLabel;
 @property (weak) IBOutlet NSProgressIndicator *progressMeter;
-@property (nonatomic, retain) NSTask *psd2htmlTask;
 
 - (void) ensureInitialArgumentList;
 - (NSString *) escapeWhitespace:(NSString *)path;

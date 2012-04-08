@@ -13,7 +13,6 @@
 @synthesize progressMeter;
 @synthesize psd2htmlPath;
 @synthesize psd2htmlArgs;
-@synthesize psd2htmlTask;
 @synthesize window = _window;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -55,40 +54,59 @@
 
 - (void) processQueue
 {
-    NSLog(@"Will now process the queue.");
     NSLog(@"Queue has this many files: %lu", [psd2htmlArgs count]-1);
+    NSLog(@"Will now process the queue.");
+    
+    NSLog(@"system call to iTerm (should be true): %d", system("ps ax | grep iTerm | grep -v grep | wc -l"));
+    NSLog(@"system call to psd2html-jsilver (should be false): %d", system("ps ax | grep psd2html-jsilver | grep -v grep | wc -l"));
+    
+    NSTask *test = [NSTask launchedTaskWithLaunchPath:@"/bin/bash"
+                             arguments: [NSArray arrayWithObjects:@"-c", @"'ps ax | grep iTerm | grep -v grep | wc -l'", nil]];
+   
+    [test waitUntilExit];
+    
+    NSData *testout = [[test standardOutput] readDataToEndOfFile];
+    
+    NSLog(@"std out from nstask test: %@", [NSString stringWithUTF8String: [testout bytes]]);
+    
     int psdcount = [psd2htmlArgs count] -1; // First argument is just "-a", so subtract one
     if (psdcount == 0) {
+        NSLog(@"No files in the queue--will quit.");
         [mainLabel setStringValue:@"Nothing to convert. (Must drag & drop onto the app icon)"];
         [self performSelector:@selector(sayBye) withObject:nil afterDelay:2.0];
     } else {
         [mainLabel setStringValue:[NSString stringWithFormat:@"Starting subordinate process chains (whipping elves) for %d PSDs", psdcount]];
         [progressMeter startAnimation:self];
         // Prepare the arguments
+        NSLog(@"Current file list: ");
         for (NSString *filepath in psd2htmlArgs) {
-            NSLog(@"Will execute with this: %@", filepath);
+            NSLog(@" --  %@", filepath);
         }
         // Send the launch command
-        // open -a psd2html-jsilver.app file file file
-        psd2htmlTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
-        [self performSelector:@selector(checkTask) withObject:nil afterDelay:10];
+        [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
+        NSLog(@"Launched psd2html-jsilver.app with the args! w00t");        
+        // start the checkTask timer
+        [self performSelector:@selector(checkTask) withObject:nil afterDelay:5];
     }
 }
 
 - (void) checkTask {
-    NSLog(@"Checking the task");
-    if (![psd2htmlTask isRunning]) {
+    int status = system("ps ax | grep psd2html-jsilver | grep -v grep | wc -l");
+    if ( status == 0 ) { // not running
         // done, say bye and exit
+        // also pop the object and inform its completion?
+        NSLog(@"Task IS NOT running, what's the current item, do we have insight into the behavior of the subtask?");
         [self sayBye];
     } else {
         // could provide a status update here
+        NSLog(@"Task IS running, what's the current item, do we have insight into the behavior of the subtask?");
         [self performSelector:@selector(checkTask) withObject:nil afterDelay:10];
     }
 }
 
 -(void) sayBye {
     NSLog(@"Quitting now!");
-    [mainLabel setStringValue:@"Goodbye!"];
+    [mainLabel setStringValue:@"Quitting app."];
     [NSApp performSelector:@selector(terminate:) withObject:nil afterDelay:1.0];
 }
 
