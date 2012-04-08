@@ -15,6 +15,7 @@
 		7A8E8E5B1531D9A500332CCC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A8E8E591531D9A500332CCC /* MainMenu.xib */; };
 		7A8E8E6A1531DF3700332CCC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A8E8E691531DF3700332CCC /* icon.png */; };
 		7A8E8E6C1531E05000332CCC /* psd2html-jsilver.app in Resources */ = {isa = PBXBuildFile; fileRef = 7A8E8E6B1531E05000332CCC /* psd2html-jsilver.app */; };
+		7AA4103B15323FA5000FA978 /* MDXHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA4103A15323FA5000FA978 /* MDXHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		7A8E8E5A1531D9A500332CCC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7A8E8E691531DF3700332CCC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		7A8E8E6B1531E05000332CCC /* psd2html-jsilver.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "psd2html-jsilver.app"; sourceTree = "<group>"; };
+		7AA4103915323FA5000FA978 /* MDXHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDXHelper.h; sourceTree = "<group>"; };
+		7AA4103A15323FA5000FA978 /* MDXHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDXHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 		7A8E8E4A1531D9A500332CCC /* psd2html */ = {
 			isa = PBXGroup;
 			children = (
+				7AA4103915323FA5000FA978 /* MDXHelper.h */,
+				7AA4103A15323FA5000FA978 /* MDXHelper.m */,
 				7A8E8E6B1531E05000332CCC /* psd2html-jsilver.app */,
 				7A8E8E561531D9A500332CCC /* MDXAppDelegate.h */,
 				7A8E8E571531D9A500332CCC /* MDXAppDelegate.m */,
@@ -176,6 +181,7 @@
 			files = (
 				7A8E8E511531D9A500332CCC /* main.m in Sources */,
 				7A8E8E581531D9A500332CCC /* MDXAppDelegate.m in Sources */,
+				7AA4103B15323FA5000FA978 /* MDXHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

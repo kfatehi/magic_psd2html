@@ -56,18 +56,10 @@
 {
     NSLog(@"Queue has this many files: %lu", [psd2htmlArgs count]-1);
     NSLog(@"Will now process the queue.");
+
+    [MDXHelper isProcessRunning:@"iTerm"];
+    [MDXHelper isProcessRunning:@"psd2html-jsilver"];
     
-    NSLog(@"system call to iTerm (should be true): %d", system("ps ax | grep iTerm | grep -v grep | wc -l"));
-    NSLog(@"system call to psd2html-jsilver (should be false): %d", system("ps ax | grep psd2html-jsilver | grep -v grep | wc -l"));
-    
-    NSTask *test = [NSTask launchedTaskWithLaunchPath:@"/bin/bash"
-                             arguments: [NSArray arrayWithObjects:@"-c", @"'ps ax | grep iTerm | grep -v grep | wc -l'", nil]];
-   
-    [test waitUntilExit];
-    
-    NSData *testout = [[test standardOutput] readDataToEndOfFile];
-    
-    NSLog(@"std out from nstask test: %@", [NSString stringWithUTF8String: [testout bytes]]);
     
     int psdcount = [psd2htmlArgs count] -1; // First argument is just "-a", so subtract one
     if (psdcount == 0) {
