@@ -120,13 +120,13 @@
         // by using isProcessRunning against the Decrufter, X11, and Reshuffler
         
         if (isRunning(@"Decrufter") || isRunning(@"Photoshop")) {
-            showMsg(@"Meticulously removing tricky, sticky cruft from the PSD...");
+            showMsg(@"Decrufting...");
         } else if isRunning(@"Reshuffler") {
-            showMsg(@"Applying magical DOM reshuffling spices...");
+            showMsg(@"Reshuffling...");
         } else if isRunning(@"python-fu-psd2html") {
-            showMsg(@"Converting... Make sure to click through any dialogs.");
+            showMsg(@"Generating...");
         } else {
-            showMsg(@"In process... Make sure to click through any dialogs.");
+            showMsg(@"In process...");
         }
         [self performSelector:@selector(checkTask) withObject:nil afterDelay:5];
 
@@ -139,7 +139,7 @@
     [progressMeter stopAnimation:self];
     if ([filePaths count] > 0) {
         NSLog(@"There are files to delete");
-        showMsg(@"Cleaning up temporary files & shutting down.");        
+        showMsg(@"Finished! Shutting down.");        
         [[NSTask launchedTaskWithLaunchPath:@"/bin/rm" arguments:filePaths] waitUntilExit];
     }
     [NSApp performSelector:@selector(terminate:) withObject:nil afterDelay:2.5];
