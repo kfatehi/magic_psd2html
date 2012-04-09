@@ -18,13 +18,13 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    NSLog(@"bundle path.. %@", [[NSBundle mainBundle] bundlePath]);
     [_window setLevel:NSStatusWindowLevel];
     NSLog(@"Startup");
-    if ([self ensureReadyState]) {
-        // Wait a bit, make sure we've filled our set of PSDs...
-        // Then launch psd2html-jsilver.app
-        [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
-    }    
+    [self ensureReadyState];
+    // Wait a bit, make sure we've filled our set of PSDs...
+    // Then launch psd2html-jsilver.app
+    [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
 }
 
 - (BOOL) ensureReadyState {
@@ -57,7 +57,7 @@
 
 - (BOOL)queueFile:(NSString *)file
 {
-    if (![self ensureReadyState]) return NO;
+    [self ensureReadyState];
     
     NSLog(@"The following file has been queued: %@", file);
     
