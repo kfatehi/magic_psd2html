@@ -1,10 +1,11 @@
 //
 //  MDXAppDelegate.h
-//  psd2html
+//  The Magic PSD to HTML Converter
 //
 //  Created by Keyvan Fatehi on 4/8/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 MDX Research Labs All rights reserved.
 //
+//  psd2html-4.0-engine.app by Jonathan Silverman
 
 #import <Cocoa/Cocoa.h>
 #import "MDXHelper.h"

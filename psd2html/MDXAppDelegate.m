@@ -1,10 +1,11 @@
 //
 //  MDXAppDelegate.m
-//  psd2html
+//  The Magic PSD to HTML Converter
 //
 //  Created by Keyvan Fatehi on 4/8/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 MDX Research Labs All rights reserved.
 //
+//  psd2html-4.0-engine.app by Jonathan Silverman
 
 #import "MDXAppDelegate.h"
 #import "MDXHelper.h"
@@ -23,7 +24,7 @@
     NSLog(@"Startup");
     [self ensureReadyState];
     // Wait a bit, make sure we've filled our set of PSDs...
-    // Then launch psd2html-jsilver.app
+    // Then launch psd2html-engine.app
     [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
 }
 
@@ -37,7 +38,7 @@
     if ([psd2htmlArgs count] == 0) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Adobe Photoshop CS5/"]) {
             NSLog(@"Photoshop is installed");
-            psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-jsilver" ofType:@"app"];
+            psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-engine" ofType:@"app"];
             psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
             filePaths = [NSMutableArray array];
             return YES;
@@ -97,19 +98,19 @@
         
         [psd2htmlArgs addObjectsFromArray:filePaths];
         
-        // Start psd2html-4.0-jsilver.app with the file list
+        // Start psd2html-4.0-engine.app with the file list
         // -----------------------------
         [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
         // ------------------------------
         
-        NSLog(@"Launched psd2html-jsilver.app with the args! w00t");        
+        NSLog(@"Launched psd2html-engine.app with the args! w00t");        
         // start the checkTask timer, given enough time for things to start...
         [self performSelector:@selector(checkTask) withObject:nil afterDelay:10];
     }
 }
 
 - (void) checkTask {
-    if (isRunning(@"psd2html-4.0-jsilver")) {       
+    if (isRunning(@"psd2html-4.0-engine")) {       
         NSLog(@"Task IS running, what's the current item, do we have insight into the behavior of the subtask? Will check if it's running again soon.");
         // So we may want to implement some AppleScript event listeners
         // the script can then send messages to THIS program, informing it of
