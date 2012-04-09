@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A1E7BED15325EC0007B20A3 /* psd2html-4.0-jsilver.app in Resources */ = {isa = PBXBuildFile; fileRef = 7A1E7BEC15325EC0007B20A3 /* psd2html-4.0-jsilver.app */; };
-		7A1E7BEF15327DB6007B20A3 /* psd2html.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7A1E7BEE15327DB6007B20A3 /* psd2html.icns */; };
+		7A1E7BEF15327DB6007B20A3 /* Magic PSD to HTML Converter.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7A1E7BEE15327DB6007B20A3 /* Magic PSD to HTML Converter.icns */; };
 		7A8E8E451531D9A500332CCC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8E8E441531D9A500332CCC /* Cocoa.framework */; };
 		7A8E8E4F1531D9A500332CCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A8E8E4D1531D9A500332CCC /* InfoPlist.strings */; };
 		7A8E8E511531D9A500332CCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E8E501531D9A500332CCC /* main.m */; };
@@ -20,16 +20,16 @@
 
 /* Begin PBXFileReference section */
 		7A1E7BEC15325EC0007B20A3 /* psd2html-4.0-jsilver.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "psd2html-4.0-jsilver.app"; sourceTree = "<group>"; };
-		7A1E7BEE15327DB6007B20A3 /* psd2html.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = psd2html.icns; sourceTree = "<group>"; };
-		7A8E8E401531D9A500332CCC /* psd2html.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = psd2html.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1E7BEE15327DB6007B20A3 /* Magic PSD to HTML Converter.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Magic PSD to HTML Converter.icns"; sourceTree = "<group>"; };
+		7A8E8E401531D9A500332CCC /* Magic PSD to HTML Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Magic PSD to HTML Converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8E8E441531D9A500332CCC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7A8E8E471531D9A500332CCC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		7A8E8E481531D9A500332CCC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7A8E8E491531D9A500332CCC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7A8E8E4C1531D9A500332CCC /* psd2html-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "psd2html-Info.plist"; sourceTree = "<group>"; };
+		7A8E8E4C1531D9A500332CCC /* Magic PSD to HTML Converter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Magic PSD to HTML Converter-Info.plist"; sourceTree = "<group>"; };
 		7A8E8E4E1531D9A500332CCC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7A8E8E501531D9A500332CCC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7A8E8E521531D9A500332CCC /* psd2html-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "psd2html-Prefix.pch"; sourceTree = "<group>"; };
+		7A8E8E521531D9A500332CCC /* Magic PSD to HTML Converter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Magic PSD to HTML Converter-Prefix.pch"; sourceTree = "<group>"; };
 		7A8E8E541531D9A500332CCC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		7A8E8E561531D9A500332CCC /* MDXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDXAppDelegate.h; sourceTree = "<group>"; };
 		7A8E8E571531D9A500332CCC /* MDXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDXAppDelegate.m; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		7A8E8E351531D9A500332CCC = {
 			isa = PBXGroup;
 			children = (
-				7A1E7BEE15327DB6007B20A3 /* psd2html.icns */,
+				7A1E7BEE15327DB6007B20A3 /* Magic PSD to HTML Converter.icns */,
 				7A8E8E4A1531D9A500332CCC /* psd2html */,
 				7A8E8E431531D9A500332CCC /* Frameworks */,
 				7A8E8E411531D9A500332CCC /* Products */,
@@ -63,7 +63,7 @@
 		7A8E8E411531D9A500332CCC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7A8E8E401531D9A500332CCC /* psd2html.app */,
+				7A8E8E401531D9A500332CCC /* Magic PSD to HTML Converter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,10 +104,10 @@
 		7A8E8E4B1531D9A500332CCC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7A8E8E4C1531D9A500332CCC /* psd2html-Info.plist */,
+				7A8E8E4C1531D9A500332CCC /* Magic PSD to HTML Converter-Info.plist */,
 				7A8E8E4D1531D9A500332CCC /* InfoPlist.strings */,
 				7A8E8E501531D9A500332CCC /* main.m */,
-				7A8E8E521531D9A500332CCC /* psd2html-Prefix.pch */,
+				7A8E8E521531D9A500332CCC /* Magic PSD to HTML Converter-Prefix.pch */,
 				7A8E8E531531D9A500332CCC /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -116,9 +116,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7A8E8E3F1531D9A500332CCC /* psd2html */ = {
+		7A8E8E3F1531D9A500332CCC /* Magic PSD to HTML Converter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A8E8E5E1531D9A500332CCC /* Build configuration list for PBXNativeTarget "psd2html" */;
+			buildConfigurationList = 7A8E8E5E1531D9A500332CCC /* Build configuration list for PBXNativeTarget "Magic PSD to HTML Converter" */;
 			buildPhases = (
 				7A8E8E3C1531D9A500332CCC /* Sources */,
 				7A8E8E3D1531D9A500332CCC /* Frameworks */,
@@ -128,9 +128,9 @@
 			);
 			dependencies = (
 			);
-			name = psd2html;
+			name = "Magic PSD to HTML Converter";
 			productName = psd2html;
-			productReference = 7A8E8E401531D9A500332CCC /* psd2html.app */;
+			productReference = 7A8E8E401531D9A500332CCC /* Magic PSD to HTML Converter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -142,7 +142,7 @@
 				CLASSPREFIX = MDX;
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = 7A8E8E3A1531D9A500332CCC /* Build configuration list for PBXProject "psd2html" */;
+			buildConfigurationList = 7A8E8E3A1531D9A500332CCC /* Build configuration list for PBXProject "Magic PSD to HTML Converter" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -154,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7A8E8E3F1531D9A500332CCC /* psd2html */,
+				7A8E8E3F1531D9A500332CCC /* Magic PSD to HTML Converter */,
 			);
 		};
 /* End PBXProject section */
@@ -168,7 +168,7 @@
 				7A8E8E551531D9A500332CCC /* Credits.rtf in Resources */,
 				7A8E8E5B1531D9A500332CCC /* MainMenu.xib in Resources */,
 				7A1E7BED15325EC0007B20A3 /* psd2html-4.0-jsilver.app in Resources */,
-				7A1E7BEF15327DB6007B20A3 /* psd2html.icns in Resources */,
+				7A1E7BEF15327DB6007B20A3 /* Magic PSD to HTML Converter.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,9 +266,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "psd2html/psd2html-Prefix.pch";
-				INFOPLIST_FILE = "psd2html/psd2html-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
+				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
+				PRODUCT_NAME = "Magic PSD to HTML Converter";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -277,9 +277,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "psd2html/psd2html-Prefix.pch";
-				INFOPLIST_FILE = "psd2html/psd2html-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
+				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
+				PRODUCT_NAME = "Magic PSD to HTML Converter";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -287,7 +287,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7A8E8E3A1531D9A500332CCC /* Build configuration list for PBXProject "psd2html" */ = {
+		7A8E8E3A1531D9A500332CCC /* Build configuration list for PBXProject "Magic PSD to HTML Converter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A8E8E5C1531D9A500332CCC /* Debug */,
@@ -296,7 +296,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A8E8E5E1531D9A500332CCC /* Build configuration list for PBXNativeTarget "psd2html" */ = {
+		7A8E8E5E1531D9A500332CCC /* Build configuration list for PBXNativeTarget "Magic PSD to HTML Converter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A8E8E5F1531D9A500332CCC /* Debug */,

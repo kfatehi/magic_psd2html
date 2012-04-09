@@ -24,7 +24,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>psd2html.icns</string>
+	<string>Magic PSD to HTML Converter</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.mdx.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
