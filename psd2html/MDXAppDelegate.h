@@ -20,8 +20,7 @@
 @property (weak) IBOutlet NSProgressIndicator *progressMeter;
 
 - (void) ensureReadyState;
-- (NSString *) escapeWhitespace:(NSString *)path;
-- (BOOL)queueFile:(NSString *)file;
+- (BOOL) queueFile:(NSString *)file;
 - (void) processQueue;
 - (void) checkTask;
 - (void) sayBye;

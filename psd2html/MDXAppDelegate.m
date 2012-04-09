@@ -39,25 +39,20 @@
     // if it is not installed we should stop immediately.
     
     if ([psd2htmlArgs count] < 1) {
-        psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-jsilver" ofType:@"app"];
+        psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-jsilver" ofType:@"app"];
         psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
     }
-}
-
-- (NSString *) escapeWhitespace:(NSString *)path {
-    return [path stringByReplacingOccurrencesOfString:@" " withString:@"\\ "];
 }
 
 - (BOOL)queueFile:(NSString *)file
 {
     [self ensureReadyState];
-    NSString *psdPath = [self escapeWhitespace:file];
-    NSLog(@"The following file has been queued: %@",psdPath);
+    NSLog(@"The following file has been queued: %@", file);
     
     // We could do things like make sure the file is real here,
     // preventing things that might fail in the applescript...
 
-    // More importantly, let's duplicate the input file
+    // TODO: More importantly, let's duplicate the input file
     
     
     [psd2htmlArgs addObject:file];
@@ -68,9 +63,6 @@
 {
     NSLog(@"Queue has this many files: %lu", [psd2htmlArgs count]-1);
     NSLog(@"Will now process the queue.");  
-    
-    isRunning(@"psd2html-jsilver");
-    //[MDXHelper isProcessRunning:@"psd2html"];
     
     int psdcount = [psd2htmlArgs count] -1; // First argument is just "-a", so subtract one
     if (psdcount == 0) {
@@ -93,7 +85,7 @@
 }
 
 - (void) checkTask {
-    if (isRunning(@"psd2html-jsilver")) {       
+    if (isRunning(@"psd2html-4.0-jsilver")) {       
         NSLog(@"Task IS running, what's the current item, do we have insight into the behavior of the subtask? Will check if it's running again soon.");
         // So we may want to implement some AppleScript event listeners
         // the script can then send messages to THIS program, informing it of
