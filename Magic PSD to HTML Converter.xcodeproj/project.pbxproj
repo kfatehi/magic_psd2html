@@ -268,12 +268,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Magic PSD to HTML Converter.entitlements";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: KEYVAN FATEHI";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
 				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
 				PRODUCT_NAME = "Magic PSD to HTML Converter";
-				PROVISIONING_PROFILE = "40A1B845-1ABA-4A48-B5BD-FDD3F29FAC20";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -282,12 +282,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Magic PSD to HTML Converter.entitlements";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: KEYVAN FATEHI";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
 				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
 				PRODUCT_NAME = "Magic PSD to HTML Converter";
-				PROVISIONING_PROFILE = "40A1B845-1ABA-4A48-B5BD-FDD3F29FAC20";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
