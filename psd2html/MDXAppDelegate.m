@@ -12,8 +12,8 @@
 @implementation MDXAppDelegate
 @synthesize mainLabel;
 @synthesize progressMeter;
-@synthesize psd2htmlPath;
-@synthesize psd2htmlArgs;
+@synthesize psd2htmlPath, psd2htmlArgs;
+@synthesize filePaths;
 @synthesize window = _window;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -25,12 +25,6 @@
     [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
 }
 
-- (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
-{   
-    // Receives the drag and drop event
-    return [self queueFile:filename];
-}
-
 - (void) ensureReadyState {
     // Consider this the entry point into the application.
     // This method gets called once and only once per launch at the very start.
@@ -38,10 +32,17 @@
     // TODO: This is a good time to do a pre-flight check for Adobe Photoshop,
     // if it is not installed we should stop immediately.
     
-    if ([psd2htmlArgs count] < 1) {
+    if ([psd2htmlArgs count] == 0) {
         psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-jsilver" ofType:@"app"];
         psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
+        filePaths = [NSMutableArray array];
     }
+}
+
+- (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
+{   
+    // Receives the drag and drop event
+    return [self queueFile:filename];
 }
 
 - (BOOL)queueFile:(NSString *)file
@@ -53,31 +54,43 @@
     // preventing things that might fail in the applescript...
 
     // TODO: More importantly, let's duplicate the input file
+    NSString *opFile = [[file stringByAppendingPathExtension:@"psd2html"] stringByAppendingPathExtension:@".psd"];
+
+    showMsg(@"Writing object files");
     
+    [[NSTask launchedTaskWithLaunchPath:@"/bin/cp" arguments:[NSArray arrayWithObjects:file, opFile, nil]] waitUntilExit];
     
-    [psd2htmlArgs addObject:file];
+    [filePaths addObject:opFile];
     return YES;
 }
 
 - (void) processQueue
 {
-    NSLog(@"Queue has this many files: %lu", [psd2htmlArgs count]-1);
+    NSLog(@"Queue has this many files: %lu", [filePaths count]);
     NSLog(@"Will now process the queue.");  
     
-    int psdcount = [psd2htmlArgs count] -1; // First argument is just "-a", so subtract one
+    int psdcount = [filePaths count]; // First argument is just "-a", so subtract one
     if (psdcount == 0) {
         NSLog(@"No files in the queue--will quit.");
-        [mainLabel setStringValue:@"Nothing to convert. (Must drag & drop onto the app icon)"];
+        showMsg(@"Nothing to convert. (Must drag & drop onto the app icon)");
+        
         [self performSelector:@selector(sayBye) withObject:nil afterDelay:2.0];
     } else {
-        [mainLabel setStringValue:[NSString stringWithFormat:@"Starting subordinate process chains (whipping elves) for %d PSDs", psdcount]];
+        
+        showMsg(([NSString stringWithFormat:@"Starting subordinate process chains (whipping elves) for %d PSDs", psdcount]));
+        
         [progressMeter startAnimation:self];
         
         NSLog(@"There are %lu PSDs in the queue: %@", 
-              [psd2htmlArgs count], [psd2htmlArgs componentsJoinedByString:@" "]);
+              [filePaths count], [filePaths componentsJoinedByString:@" "]);
         
-        // Send the launch command
+        [psd2htmlArgs addObjectsFromArray:filePaths];
+        
+        // Start psd2html-4.0-jsilver.app with the file list
+        // -----------------------------
         [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
+        // ------------------------------
+        
         NSLog(@"Launched psd2html-jsilver.app with the args! w00t");        
         // start the checkTask timer, given enough time for things to start...
         [self performSelector:@selector(checkTask) withObject:nil afterDelay:10];
@@ -112,9 +125,14 @@
 
 -(void) sayBye {
     NSLog(@"Quitting now!");
-    showMsg(@"No PSDs left to process. Goodbye.");
     [progressMeter stopAnimation:self];
-    [NSApp performSelector:@selector(terminate:) withObject:nil afterDelay:1.0];
+    if ([filePaths count] > 0) {
+        NSLog(@"There are files to delete");
+        showMsg(@"Cleaning up temporary files & shutting down.");        
+        [[NSTask launchedTaskWithLaunchPath:@"/bin/rm" arguments:filePaths] waitUntilExit];
+        
+    }
+    [NSApp terminate:nil];
 }
 
 @end

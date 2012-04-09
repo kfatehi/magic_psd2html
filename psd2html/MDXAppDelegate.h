@@ -15,6 +15,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, retain) NSString *psd2htmlPath;
+@property (nonatomic, retain) NSMutableArray *filePaths;
 @property (nonatomic, retain) NSMutableArray *psd2htmlArgs;
 @property (weak) IBOutlet NSTextField *mainLabel;
 @property (weak) IBOutlet NSProgressIndicator *progressMeter;
