@@ -20,7 +20,7 @@
 @property (weak) IBOutlet NSTextField *mainLabel;
 @property (weak) IBOutlet NSProgressIndicator *progressMeter;
 
-- (void) ensureReadyState;
+- (BOOL) ensureReadyState;
 - (BOOL) queueFile:(NSString *)file;
 - (void) processQueue;
 - (void) checkTask;

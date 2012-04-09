@@ -1,2 +1,2 @@
-psd2html.xcodeproj/project.xcworkspace/*
-psd2html.xcodeproj/xcuserdata/*
+*.xcodeproj/project.xcworkspace/*
+*.xcodeproj/xcuserdata/*

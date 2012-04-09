@@ -19,23 +19,32 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     NSLog(@"Startup");
-    [self ensureReadyState];
-    // Wait a bit, make sure we've filled our set of PSDs...
-    // Then launch psd2html-jsilver.app
-    [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
+    if ([self ensureReadyState]) {
+        // Wait a bit, make sure we've filled our set of PSDs...
+        // Then launch psd2html-jsilver.app
+        [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
+    }    
 }
 
-- (void) ensureReadyState {
+- (BOOL) ensureReadyState {
     // Consider this the entry point into the application.
     // This method gets called once and only once per launch at the very start.
     
     // TODO: This is a good time to do a pre-flight check for Adobe Photoshop,
     // if it is not installed we should stop immediately.
-    
+        
     if ([psd2htmlArgs count] == 0) {
-        psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-jsilver" ofType:@"app"];
-        psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
-        filePaths = [NSMutableArray array];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Adobe Photoshop CS5/"]) {
+            NSLog(@"Photoshop is installed");
+            psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-jsilver" ofType:@"app"];
+            psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
+            filePaths = [NSMutableArray array];
+            return YES;
+        } else {
+            showMsg(@"Could not find Adobe Photoshop @ /Applications/Adobe Photoshop CS5/");
+            [self sayBye];
+            return NO;
+        }
     }
 }
 
@@ -47,7 +56,8 @@
 
 - (BOOL)queueFile:(NSString *)file
 {
-    [self ensureReadyState];
+    if (![self ensureReadyState]) return NO;
+    
     NSLog(@"The following file has been queued: %@", file);
     
     // We could do things like make sure the file is real here,
@@ -58,7 +68,7 @@
 
     showMsg(@"Writing object files");
     
-    [[NSTask launchedTaskWithLaunchPath:@"/bin/cp" arguments:[NSArray arrayWithObjects:file, opFile, nil]] waitUntilExit];
+    // [[NSTask launchedTaskWithLaunchPath:@"/bin/cp" arguments:[NSArray arrayWithObjects:file, opFile, nil]] waitUntilExit];
     
     [filePaths addObject:opFile];
     return YES;
@@ -88,7 +98,7 @@
         
         // Start psd2html-4.0-jsilver.app with the file list
         // -----------------------------
-        [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
+        // [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
         // ------------------------------
         
         NSLog(@"Launched psd2html-jsilver.app with the args! w00t");        
@@ -130,9 +140,8 @@
         NSLog(@"There are files to delete");
         showMsg(@"Cleaning up temporary files & shutting down.");        
         [[NSTask launchedTaskWithLaunchPath:@"/bin/rm" arguments:filePaths] waitUntilExit];
-        
     }
-    [NSApp terminate:nil];
+    [NSApp performSelector:@selector(terminate:) withObject:nil afterDelay:2.5];
 }
 
 @end
