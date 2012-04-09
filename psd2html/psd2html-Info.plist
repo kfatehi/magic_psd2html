@@ -9,20 +9,16 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>psd</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>application.icns</string>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>image/photoshop</string>
+				<string>*</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>PSD File</string>
+			<string>Any-file</string>
 			<key>CFBundleTypeRole</key>
-			<string>Shell</string>
-			<key>LSIsAppleDefaultForType</key>
-			<true/>
+			<string>None</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -48,7 +44,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2012 __MyCompanyName__. All rights reserved.</string>
+	<string>Copyright © 2012 MDX Research Labs. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
