@@ -25,14 +25,12 @@
 	<string>droplet</string>
 	<key>CFBundleIconFile</key>
 	<string>droplet</string>
-    <key>CFBundleName</key>
-    <string>PSD Overlord</string>
 	<key>CFBundleIdentifier</key>
-	<string>EA6HRUK3Z8.com.mdx.psd2html</string>
+	<string>com.mdx.magic-psd2html-converter.engine</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>psd2html-2.0</string>
+	<string>psd2html-4.0-engine</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
