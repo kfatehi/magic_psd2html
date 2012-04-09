@@ -18,6 +18,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [_window setLevel:NSStatusWindowLevel];
     NSLog(@"Startup");
     if ([self ensureReadyState]) {
         // Wait a bit, make sure we've filled our set of PSDs...
@@ -43,9 +44,9 @@
         } else {
             showMsg(@"Could not find Adobe Photoshop @ /Applications/Adobe Photoshop CS5/");
             [self sayBye];
-            return NO;
         }
     }
+    return NO;
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
@@ -63,7 +64,7 @@
     // We could do things like make sure the file is real here,
     // preventing things that might fail in the applescript...
 
-    // TODO: More importantly, let's duplicate the input file
+    // Most importantly, let's make a temporary copy of the psd.
     NSString *opFile = [file stringByReplacingOccurrencesOfString:@".psd" withString:@"-psd2html.psd"];
 
     showMsg(@"Writing object files");
@@ -98,7 +99,7 @@
         
         // Start psd2html-4.0-jsilver.app with the file list
         // -----------------------------
-        // [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
+        [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:psd2htmlArgs];
         // ------------------------------
         
         NSLog(@"Launched psd2html-jsilver.app with the args! w00t");        

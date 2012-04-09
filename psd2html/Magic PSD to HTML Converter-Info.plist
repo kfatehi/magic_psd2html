@@ -26,7 +26,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Magic PSD to HTML Converter</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.mdx.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.mdx.magic-psd2html-converter</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
