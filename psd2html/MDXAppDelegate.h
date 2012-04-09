@@ -17,8 +17,8 @@
 @property (nonatomic, retain) NSString *psd2htmlPath;
 @property (nonatomic, retain) NSMutableArray *filePaths;
 @property (nonatomic, retain) NSMutableArray *psd2htmlArgs;
-@property (weak) IBOutlet NSTextField *mainLabel;
-@property (weak) IBOutlet NSProgressIndicator *progressMeter;
+@property (nonatomic, retain) IBOutlet NSTextField *mainLabel;
+@property (nonatomic, retain) IBOutlet NSProgressIndicator *progressMeter;
 
 - (BOOL) ensureReadyState;
 - (BOOL) queueFile:(NSString *)file;
