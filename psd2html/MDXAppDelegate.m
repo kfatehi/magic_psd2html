@@ -88,7 +88,7 @@
         [self performSelector:@selector(sayBye) withObject:nil afterDelay:2.0];
     } else {
         
-        showMsg(([NSString stringWithFormat:@"Starting subordinate process chains (whipping elves) for %d PSDs", psdcount]));
+        showMsg(([NSString stringWithFormat:@"Converting %d PSDs to HTML", psdcount]));
         
         [progressMeter startAnimation:self];
         
