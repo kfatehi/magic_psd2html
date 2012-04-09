@@ -261,7 +261,7 @@
 # How to handle embedded color profiles when opening a file.  Possible values
 # are ask, keep and convert.
 # 
-# (color-profile-policy ask)
+(color-profile-policy keep)
 
 # Keep a permanent record of all opened and saved files in the Recent
 # Documents list.  Possible values are yes and no.
