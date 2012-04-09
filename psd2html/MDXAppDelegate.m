@@ -54,7 +54,7 @@
     // preventing things that might fail in the applescript...
 
     // TODO: More importantly, let's duplicate the input file
-    NSString *opFile = [[file stringByAppendingPathExtension:@"psd2html"] stringByAppendingPathExtension:@".psd"];
+    NSString *opFile = [file stringByReplacingOccurrencesOfString:@".psd" withString:@"-psd2html.psd"];
 
     showMsg(@"Writing object files");
     
