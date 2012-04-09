@@ -68,7 +68,7 @@
 
     showMsg(@"Writing object files");
     
-    // [[NSTask launchedTaskWithLaunchPath:@"/bin/cp" arguments:[NSArray arrayWithObjects:file, opFile, nil]] waitUntilExit];
+    [[NSTask launchedTaskWithLaunchPath:@"/bin/cp" arguments:[NSArray arrayWithObjects:file, opFile, nil]] waitUntilExit];
     
     [filePaths addObject:opFile];
     return YES;
