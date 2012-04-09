@@ -36,7 +36,6 @@
 		7A8E8E5A1531D9A500332CCC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7AA4103915323FA5000FA978 /* MDXHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDXHelper.h; sourceTree = "<group>"; };
 		7AA4103A15323FA5000FA978 /* MDXHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDXHelper.m; sourceTree = "<group>"; };
-		7AE90ABE153294CE00D5D00B /* Magic PSD to HTML Converter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Magic PSD to HTML Converter.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +53,6 @@
 		7A8E8E351531D9A500332CCC = {
 			isa = PBXGroup;
 			children = (
-				7AE90ABE153294CE00D5D00B /* Magic PSD to HTML Converter.entitlements */,
 				7A1E7BEE15327DB6007B20A3 /* Magic PSD to HTML Converter.icns */,
 				7A8E8E4A1531D9A500332CCC /* psd2html */,
 				7A8E8E431531D9A500332CCC /* Frameworks */,
@@ -267,8 +265,7 @@
 		7A8E8E5F1531D9A500332CCC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Magic PSD to HTML Converter.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application: KEYVAN FATEHI";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
 				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
@@ -281,8 +278,7 @@
 		7A8E8E601531D9A500332CCC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Magic PSD to HTML Converter.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application: KEYVAN FATEHI";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
 				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
