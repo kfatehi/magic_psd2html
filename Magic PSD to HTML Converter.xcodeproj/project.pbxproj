@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A1E7BEF15327DB6007B20A3 /* Magic PSD to HTML Converter.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7A1E7BEE15327DB6007B20A3 /* Magic PSD to HTML Converter.icns */; };
+		7A8961E8156B2B5A00E617D6 /* com.mdx.Gimp.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7A8961E7156B2B5A00E617D6 /* com.mdx.Gimp.zip */; };
 		7A8E8E451531D9A500332CCC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8E8E441531D9A500332CCC /* Cocoa.framework */; };
 		7A8E8E4F1531D9A500332CCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A8E8E4D1531D9A500332CCC /* InfoPlist.strings */; };
 		7A8E8E511531D9A500332CCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E8E501531D9A500332CCC /* main.m */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		7A1E7BEE15327DB6007B20A3 /* Magic PSD to HTML Converter.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Magic PSD to HTML Converter.icns"; sourceTree = "<group>"; };
+		7A8961E7156B2B5A00E617D6 /* com.mdx.Gimp.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = com.mdx.Gimp.zip; sourceTree = "<group>"; };
 		7A8E8E401531D9A500332CCC /* Magic PSD to HTML Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Magic PSD to HTML Converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8E8E441531D9A500332CCC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7A8E8E471531D9A500332CCC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -90,6 +92,7 @@
 		7A8E8E4A1531D9A500332CCC /* psd2html */ = {
 			isa = PBXGroup;
 			children = (
+				7A8961E7156B2B5A00E617D6 /* com.mdx.Gimp.zip */,
 				7AF9F0DC1532CBC900252E42 /* psd2html-4.0-engine.app */,
 				7AA4103915323FA5000FA978 /* MDXHelper.h */,
 				7AA4103A15323FA5000FA978 /* MDXHelper.m */,
@@ -169,6 +172,7 @@
 				7A8E8E5B1531D9A500332CCC /* MainMenu.xib in Resources */,
 				7A1E7BEF15327DB6007B20A3 /* Magic PSD to HTML Converter.icns in Resources */,
 				7AF9F0DD1532CBC900252E42 /* psd2html-4.0-engine.app in Resources */,
+				7A8961E8156B2B5A00E617D6 /* com.mdx.Gimp.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +272,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
 				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/psd2html\"",
+				);
 				PRODUCT_NAME = "Magic PSD to HTML Converter";
 				WRAPPER_EXTENSION = app;
 			};
@@ -279,6 +287,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
 				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/psd2html\"",
+				);
 				PRODUCT_NAME = "Magic PSD to HTML Converter";
 				WRAPPER_EXTENSION = app;
 			};

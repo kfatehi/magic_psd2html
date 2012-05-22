@@ -36,14 +36,37 @@
     // if it is not installed we should stop immediately.
         
     if ([psd2htmlArgs count] == 0) {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Adobe Photoshop CS5/"]) {
-            NSLog(@"Photoshop is installed");
+        // --------
+        NSString *supportDir = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0]; 
+        NSString *gimpPath = [NSString pathWithComponents:[NSArray arrayWithObjects:supportDir, @"com.mdx.Gimp.app", nil]];
+        NSLog(@"%@", gimpPath);
+        // --------------
+        BOOL hasPhotoshop = [[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Adobe Photoshop CS5/"];
+        BOOL hasGimp = [[NSFileManager defaultManager] fileExistsAtPath:gimpPath];
+        if (hasGimp && hasPhotoshop) {
+            NSLog(@"Photoshop & Gimp are installed");
             psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-engine" ofType:@"app"];
             psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
             filePaths = [NSMutableArray array];
             return YES;
-        } else {
-            showMsg(@"Could not find Adobe Photoshop @ /Applications/Adobe Photoshop CS5/");
+        }
+        else if (!hasGimp) {
+            // doesnt have gimp, an unzip was never attempted given that the directory doesn't even exist.
+            // since it is using NSUSerDomainMask, we know there is no sane reason for it not to, so let's just extract from resources.
+            NSString *gimpZip = [[NSBundle mainBundle] pathForResource:@"com.mdx.Gimp" ofType:@"zip"];
+            showMsg(@"Installing support files. Please be patient.");
+            // try to unzip it from our resources
+            [[NSTask launchedTaskWithLaunchPath:@"/usr/bin/unzip" arguments:[NSArray arrayWithObjects:gimpZip, @"-d", supportDir, nil]] waitUntilExit];
+            // TODO: use a proper zip lib that uses events.
+            if ([[NSFileManager defaultManager] fileExistsAtPath:gimpPath])
+                showMsg(@"Support files installed!");
+                return YES;
+            NSString *gimpMsg = [NSString stringWithFormat:@"Missing components! Please contact us via link on App Store page.", gimpPath];
+            showMsg(gimpMsg);
+            [self sayBye];
+        }
+        else if (!hasPhotoshop) {
+            showMsg(@"Could not find Photoshop here: /Applications/Adobe Photoshop CS5/");
             [self sayBye];
         }
     }
