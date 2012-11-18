@@ -28,6 +28,22 @@
     [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
 }
 
+- (BOOL) detectPhotoshop {
+    NSLog(@"Detecting Photoshop");
+    NSString *ps5path = @"/Applications/Adobe Photoshop CS5/MacOS";
+    NSString *altps5path = [NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), ps5path];
+    NSString *ps6path = @"/Applications/Adobe Photoshop CS6/MacOS";
+    NSString *altps6path = [NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), ps6path];
+    
+    BOOL ps5 = (fileExists(@"/Applications/Adobe Photoshop CS5/MacOS") || fileExists(altps5path)) ? true : false;
+    
+    BOOL ps6 = (fileExists(ps6path) || fileExists(altps6path)) ? true : false;
+    
+    if (ps5) NSLog(@"Photoshop CS5 detected");
+    if (ps6) NSLog(@"Photoshop CS6 detected");
+    return (ps5 || ps6) ? true : false;
+}
+
 - (BOOL) ensureReadyState {
     // Consider this the entry point into the application.
     // This method gets called once and only once per launch at the very start.
@@ -41,7 +57,7 @@
         NSString *gimpPath = [NSString pathWithComponents:[NSArray arrayWithObjects:supportDir, @"com.mdx.Gimp.app", nil]];
         NSLog(@"%@", gimpPath);
         // --------------
-        BOOL hasPhotoshop = [[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Adobe Photoshop CS5/"];
+        BOOL hasPhotoshop = [self detectPhotoshop];
         BOOL hasGimp = [[NSFileManager defaultManager] fileExistsAtPath:gimpPath];
         if (hasGimp && hasPhotoshop) {
             NSLog(@"Photoshop & Gimp are installed");
@@ -61,7 +77,7 @@
             if ([[NSFileManager defaultManager] fileExistsAtPath:gimpPath])
                 showMsg(@"Support files installed!");
                 return YES;
-            NSString *gimpMsg = [NSString stringWithFormat:@"Missing components! Please contact us via link on App Store page.", gimpPath];
+            NSString *gimpMsg = [NSString stringWithFormat:@"Gimp was supposed to be found here: %@", gimpPath];
             showMsg(gimpMsg);
             [self sayBye];
         }
@@ -104,7 +120,7 @@
     NSLog(@"Queue has this many files: %lu", [filePaths count]);
     NSLog(@"Will now process the queue.");  
     
-    int psdcount = [filePaths count]; // First argument is just "-a", so subtract one
+    int psdcount = (int)[filePaths count]; // First argument is just "-a", so subtract one
     if (psdcount == 0) {
         NSLog(@"No files in the queue--will quit.");
         showMsg(@"Nothing to convert. (Must drag & drop onto the app icon)");

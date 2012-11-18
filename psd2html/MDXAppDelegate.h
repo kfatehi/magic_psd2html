@@ -12,6 +12,8 @@
 
 #define showMsg(msg) ([mainLabel setStringValue:msg])
 
+#define fileExists(path) ([[NSFileManager defaultManager] fileExistsAtPath:path])
+
 @interface MDXAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;

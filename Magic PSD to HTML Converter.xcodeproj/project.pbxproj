@@ -143,7 +143,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MDX;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 7A8E8E3A1531D9A500332CCC /* Build configuration list for PBXProject "Magic PSD to HTML Converter" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -269,6 +269,7 @@
 		7A8E8E5F1531D9A500332CCC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
 				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";
@@ -284,6 +285,7 @@
 		7A8E8E601531D9A500332CCC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "psd2html/Magic PSD to HTML Converter-Prefix.pch";
 				INFOPLIST_FILE = "psd2html/Magic PSD to HTML Converter-Info.plist";

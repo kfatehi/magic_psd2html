@@ -32,7 +32,7 @@
     // Grab data from process execution
     fgets(data, DATA_SIZE , pf);
     
-    int val = [[NSString stringWithUTF8String:data] integerValue];
+    int val = (int)[[NSString stringWithUTF8String:data] integerValue];
     if (val == 0)
         NSLog(@"%@ is NOT running (%d)", processName, val);
     else {
