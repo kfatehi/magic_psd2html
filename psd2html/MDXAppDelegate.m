@@ -25,14 +25,14 @@
     [self ensureReadyState];
     // Wait a bit, make sure we've filled our set of PSDs...
     // Then launch psd2html-engine.app
-    [self performSelector:@selector(processQueue) withObject:nil afterDelay:2.0];
+    [self performSelector:@selector(processQueue) withObject:nil afterDelay:1.0];
 }
 
 - (BOOL) detectPhotoshop {
     NSLog(@"Detecting Photoshop");
-    NSString *ps5path = @"/Applications/Adobe Photoshop CS5/MacOS";
+    NSString *ps5path = @"/Applications/Adobe Photoshop CS6/Adobe Photoshop CS5.app";
     NSString *altps5path = [NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), ps5path];
-    NSString *ps6path = @"/Applications/Adobe Photoshop CS6/MacOS";
+    NSString *ps6path = @"/Applications/Adobe Photoshop CS6/Adobe Photoshop CS6.app";
     NSString *altps6path = [NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), ps6path];
     
     BOOL ps5 = (fileExists(@"/Applications/Adobe Photoshop CS5/MacOS") || fileExists(altps5path)) ? true : false;
@@ -47,46 +47,47 @@
 - (BOOL) ensureReadyState {
     // Consider this the entry point into the application.
     // This method gets called once and only once per launch at the very start.
-    
-    // TODO: This is a good time to do a pre-flight check for Adobe Photoshop,
-    // if it is not installed we should stop immediately.
-        
-    if ([psd2htmlArgs count] == 0) {
-        // --------
-        NSString *supportDir = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0]; 
-        NSString *gimpPath = [NSString pathWithComponents:[NSArray arrayWithObjects:supportDir, @"com.mdx.Gimp.app", nil]];
-        NSLog(@"%@", gimpPath);
-        // --------------
-        BOOL hasPhotoshop = [self detectPhotoshop];
-        BOOL hasGimp = [[NSFileManager defaultManager] fileExistsAtPath:gimpPath];
-        if (hasGimp && hasPhotoshop) {
-            NSLog(@"Photoshop & Gimp are installed");
-            psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-engine" ofType:@"app"];
-            psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
-            filePaths = [NSMutableArray array];
-            return YES;
-        }
-        else if (!hasGimp) {
-            // doesnt have gimp, an unzip was never attempted given that the directory doesn't even exist.
-            // since it is using NSUSerDomainMask, we know there is no sane reason for it not to, so let's just extract from resources.
-            NSString *gimpZip = [[NSBundle mainBundle] pathForResource:@"com.mdx.Gimp" ofType:@"zip"];
-            showMsg(@"Installing support files. Please be patient.");
-            // try to unzip it from our resources
-            [[NSTask launchedTaskWithLaunchPath:@"/usr/bin/unzip" arguments:[NSArray arrayWithObjects:gimpZip, @"-d", supportDir, nil]] waitUntilExit];
-            // TODO: use a proper zip lib that uses events.
-            if ([[NSFileManager defaultManager] fileExistsAtPath:gimpPath])
-                showMsg(@"Support files installed!");
-                return YES;
-            NSString *gimpMsg = [NSString stringWithFormat:@"Gimp was supposed to be found here: %@", gimpPath];
-            showMsg(gimpMsg);
-            [self sayBye];
-        }
-        else if (!hasPhotoshop) {
-            showMsg(@"Could not find Photoshop here: /Applications/Adobe Photoshop CS5/");
-            [self sayBye];
-        }
+
+    BOOL hasPhotoshop = [self detectPhotoshop];
+
+    if (!hasPhotoshop) {
+        showMsg(@"Could not find Photoshop here: /Applications/Adobe Photoshop CS5/");
+        [self sayBye];
+        return NO;
     }
-    return NO;
+    
+    NSString *supportDir = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *gimpPath = [NSString pathWithComponents:[NSArray arrayWithObjects:supportDir, @"com.mdx.Gimp.app", nil]];
+    
+    NSLog(@"%@", gimpPath);
+    // --------------
+
+    BOOL hasGimp = [[NSFileManager defaultManager] fileExistsAtPath:gimpPath];
+    
+    if (!hasGimp) {
+        // doesnt have gimp, an unzip was never attempted given that the directory doesn't even exist.
+        // since it is using NSUSerDomainMask, we know there is no sane reason for it not to, so let's just extract from resources.
+        NSString *gimpZip = [[NSBundle mainBundle] pathForResource:@"com.mdx.Gimp" ofType:@"zip"];
+        showMsg(@"Installing support files. Please be patient.");
+        // try to unzip it from our resources
+        [[NSTask launchedTaskWithLaunchPath:@"/usr/bin/unzip" arguments:[NSArray arrayWithObjects:gimpZip, @"-d", supportDir, nil]] waitUntilExit];
+        // TODO: use a proper zip lib that uses events.
+        if ([[NSFileManager defaultManager] fileExistsAtPath:gimpPath])
+            showMsg(@"Support files installed!");
+        return YES;
+        NSString *gimpMsg = [NSString stringWithFormat:@"Gimp was supposed to be found here: %@", gimpPath];
+        showMsg(gimpMsg);
+        [self sayBye];
+        return NO;
+    }
+    if ([psd2htmlArgs count] == 0) {
+        NSLog(@"Photoshop & Gimp are installed");
+        psd2htmlPath = [[NSBundle mainBundle] pathForResource:@"psd2html-4.0-engine" ofType:@"app"];
+        psd2htmlArgs = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"-a%@", psd2htmlPath]];
+        filePaths = [NSMutableArray array];
+        return YES;
+    } else
+        return NO;
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
