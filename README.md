@@ -1,7 +1,7 @@
 # Magic CS6 PSD to HTML Converter
 
 ## Magic consists of the following:
-* An applescript (by jsilverMDX) which orchestrates a few other scripts, specific to Photoshop and Gimp, and a special last step "Reshuffler" that happens over HTTP to a Heroku rails app controller with (a bit of extra logic)[https://github.com/mdks/Reshuffler/blob/master/app/controllers/main_controller.rb] to finalize the process.
+* An applescript (by jsilverMDX) which orchestrates a few other scripts, specific to Photoshop and Gimp, and a special last step "Reshuffler" that happens over HTTP to a Heroku rails app controller with (a bit of extra logic](https://github.com/mdks/Reshuffler/blob/master/app/controllers/main_controller.rb) to finalize the process.
 * An objective-c wrapper that produces a mac application enabling drag & drop and status reporting of the underlying script activities.
 
 ## Usage
